@@ -1,0 +1,30 @@
+<ul>
+<h1>mpi site statistics</h1>
+
+{{#if hasLoadedOnce}}
+  <ul>
+    <li class="build-status-container">
+      <span {{bind-attr class=":build-status build_succeeds:success:failure"}}></span>
+      build status
+    </li>
+    <li><h2>total lines of code</h2>
+      <ul>
+        <li class="ruby">ruby: <span class="big-number">{{comma-numeral total_lines_of_code.app.rb}}</span> LoC in app, <span class="big-number">{{comma-numeral total_lines_of_code.test.rb}}</span> in tests</li>
+        <li class="coffee">coffeescript: <span class="big-number">{{comma-numeral total_lines_of_code.app.coffee}}</span> LoC in app, <span class="big-number">{{comma-numeral total_lines_of_code.test.coffee}}</span> in tests</li>
+        <li class="handlebars">handlebars: <span class="big-number">{{comma-numeral total_lines_of_code.app.hbs}}</span> LoC in app</li>
+      </ul>
+    </li>
+    <li>
+      <h2>unmerged branches</h2>
+      <ul class="branches">
+        {{#each branch in unmerged_branches}}
+          {{render 'branch' branch}}
+        {{/each}}
+      </ul>
+    </li>
+    <li><span class="big-number js-log-lines">{{js_log_lines}}</span> <span class="pre">console.log</span> statements</li>
+  </ul>
+  <p {{bind-attr class=":reloadIndicator isReloading:reloading"}}>updating...</p>
+{{else}}
+  <p class="reloading">loading 'em...</p>
+{{/if}}
