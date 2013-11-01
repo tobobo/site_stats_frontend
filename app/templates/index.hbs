@@ -1,28 +1,56 @@
-<ul>
 <h1>mpi site statistics</h1>
 
 {{#if hasLoadedOnce}}
   <ul>
     <li class="build-status-container">
-      <span {{bind-attr class=":build-status build_succeeds:success:failure"}}></span>
-      build status
-    </li>
-    <li><h2>total lines of code</h2>
-      <ul>
-        <li class="ruby">ruby: <span class="big-number">{{comma-numeral total_lines_of_code.app.rb}}</span> LoC in app, <span class="big-number">{{comma-numeral total_lines_of_code.test.rb}}</span> in tests</li>
-        <li class="coffee">coffeescript: <span class="big-number">{{comma-numeral total_lines_of_code.app.coffee}}</span> LoC in app, <span class="big-number">{{comma-numeral total_lines_of_code.test.coffee}}</span> in tests</li>
-        <li class="handlebars">handlebars: <span class="big-number">{{comma-numeral total_lines_of_code.app.hbs}}</span> LoC in app</li>
-      </ul>
+      <h2>
+        build status
+        <span {{bind-attr class=":build-status site_stats.build_succeeds:success:failure"}}></span>
+      </h2>
     </li>
     <li>
-      <h2>unmerged branches</h2>
-      <ul class="branches">
-        {{#each branch in unmerged_branches}}
-          {{render 'branch' branch}}
-        {{/each}}
-      </ul>
+      <h2 style="display: inline;">in-progress sprint.ly stories: </h2><span class="big-number">{{sprintly_stories.length}}</span>
     </li>
-    <li><span class="big-number js-log-lines">{{js_log_lines}}</span> <span class="pre">console.log</span> statements</li>
+    <li class="two-columns">
+      <div class="unmerged-branches">
+        <h2>unmerged branches</h2>
+        <ul class="branches">
+          {{#each branch in site_stats.unmerged_branches}}
+            {{render 'branch' branch}}
+          {{/each}}
+        </ul>
+      </div>
+      <div class="github-events">
+        <h2>last 3 github events</h2>
+        <ul>
+          {{#each event in github_events}}
+            {{render github_event event}}
+          {{/each}}
+        </ul>
+      </div>
+    </li>
+    {{#with site_stats}}
+      <li>
+        <h2>total lines of code</h2>
+        <ul>
+          <li class="ruby">
+            <span class="loc-col">ruby:</span>
+            <span class="loc-col"><span class="big-number">{{comma-numeral total_lines_of_code.app.rb}}</span> in app,</span>
+            <span class="loc-col"><span class="big-number">{{comma-numeral total_lines_of_code.test.rb}}</span> in tests</span>
+          </li>
+          <li class="coffee">
+            <span class="loc-col">coffeescript:</span>
+            <span class="loc-col"><span class="big-number">{{comma-numeral total_lines_of_code.app.coffee}}</span>in app,</span>
+            <span class="loc-col"><span class="big-number">{{comma-numeral total_lines_of_code.test.coffee}}</span> in tests</span>
+          </li>
+          <li class="handlebars">
+            <span class="loc-col">handlebars:</span>
+            <span class="loc-col"><span class="big-number">{{comma-numeral total_lines_of_code.app.hbs}}</span> in app</span>
+          </li>
+          <li><span class="loc-col"><span class="pre">console.log</span>:</span><span class="loc-col"><span class="big-number js-log-lines">{{js_log_lines}}</span> in app</span></li>
+        </ul>
+      </li>
+    {{/with}}
   </ul>
   <p {{bind-attr class=":reloadIndicator isReloading:reloading"}}>updating...</p>
 {{else}}

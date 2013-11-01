@@ -16,8 +16,13 @@ h1 {
   font-size: 1.1em;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
 pre, .pre {
   font-family: "Monaco", monospace;
+  font-size: 0.8em;
 }
 
 .reloadIndicator {
@@ -33,6 +38,8 @@ pre, .pre {
 .big-number {
   font-size: 3em;
   font-weight: 600;
+  line-height: 0.7em;
+  display: inline-block;
 }
 
 .ruby .big-number {
@@ -49,6 +56,15 @@ pre, .pre {
 
 .js-log-lines.big-number {
   color: #35C;
+}
+
+.loc-col:first-child {
+  width: 100px;
+}
+
+.loc-col {
+  display: inline-block;
+  width: 150px;
 }
 
 .branch {
@@ -68,19 +84,48 @@ pre, .pre {
 }
 
 ul {
+  margin-top: 40px;
+  padding-left: 0;
   list-style-type: none;
+  max-width: 600px;
+}
+
+ul li ul {
+  margin-top: 0;
 }
 
 li {
-  margin: 40px;
+  margin: 20px 20px 20px 0;
+  clear: both;
+  width: 600px;
+}
+
+li.two-columns {
+  overflow: auto;
+}
+
+@media screen and (max-width: 600px) {
+  li {
+    width: auto;
+  }
+}
+
+ul li ul li {
+  width: auto;
 }
 
 li:first-child {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 li ul > li, li ul > li:first-child {
-  margin: 15px;
+  margin: 15px 15px 15px 0;
+}
+
+.unmerged-branches, .github-events {
+  display: inline;
+  width: 300px;
+  float: left;
 }
 
 ul.branches a {
@@ -92,9 +137,13 @@ ul.branches a:hover {
   text-decoration: underline;
 }
 
+li.console-log-statements {
+  text-align: right;
+}
+
 .build-status {
   display: inline-block;
-  margin: 0 7.5px -7.5px 0;
+  margin: 0 7.5px -6px;
   width: 24px;
   height: 24px;
   border-radius: 12px;
@@ -109,6 +158,22 @@ ul.branches a:hover {
 .build-status.failure {
   background-color: #E92C2C;
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.5), inset 0 0 8px rgba(0,0,0,0.8);
+}
+
+img.gh-event-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  margin: 0 8px -1.5px 0;
+}
+
+.gh-info {
+  display: inline-block;
+}
+
+.gh-info time {
+  display: block;
+  font-size: 0.8em;
 }
 
 /*@keyframes domChanged { from { background: yellow; } }

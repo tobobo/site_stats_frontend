@@ -1,7 +1,7 @@
 var IndexController = Ember.ObjectController.extend({
   hasLoadedOnce: false,
   isReloading: false,
-  reloadInterval: 5000,
+  reloadInterval: 10000,
   actions: {
     waitToReload: function() {
       var controller = this;
